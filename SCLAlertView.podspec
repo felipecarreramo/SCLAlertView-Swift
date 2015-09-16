@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.social_media_url   = "http://twitter.com/hackua"
   s.platform     = :ios
   s.ios.deployment_target = '8.0'
-  s.source       = { :git => "https://github.com/vikmeup/SCLAlertView-Swift.git", :tag => "0.4.1" }
+  s.source       = { :git => "https://github.com/vikmeup/SCLAlertView-Swift.git", :commit => "4a514b26ce75adf4ae4ebb5f48e27e06904d9005" }
   s.source_files  = "SCLAlertView/*"
   #s.framework  = "QuartzCore"
   s.requires_arc = true
