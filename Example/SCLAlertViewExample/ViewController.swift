@@ -51,7 +51,7 @@ class ViewController: UIViewController {
             
         })
         alert.showPicker("Please select year", options: [1991, 1992, 1993, 1994], closeButtonTitle: "Select", onSelectValue: { value in
-            
+            print(value)
         })
         button.backgroundColor = UIColor.greenColor()
         

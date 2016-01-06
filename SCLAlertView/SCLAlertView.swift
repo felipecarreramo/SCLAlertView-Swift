@@ -365,6 +365,9 @@ public class SCLAlertView: UIViewController, UIPickerViewDataSource, UIPickerVie
     // showCustom(view, title, subTitle)
     public func showPicker(title: String, options: [AnyObject], closeButtonTitle:String?=nil, duration:NSTimeInterval=0.0, colorStyle: UInt=0x22B573, colorTextButton: UInt=0xFFFFFF, onSelectValue: (value: String) -> ()) -> SCLAlertViewResponder {
         onSelectValuePicker = onSelectValue
+        if let firstValueOfOptions = options.first {
+            onSelectValuePicker?(value: "\(firstValueOfOptions)" )
+        }
         pickerOptions = options
         pickerView = UIPickerView(frame: CGRectMake(0,0, 100, 100))
         pickerView?.delegate = self
@@ -563,6 +566,10 @@ public class SCLAlertView: UIViewController, UIPickerViewDataSource, UIPickerVie
     
     public func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return "\(pickerOptions![row])"
+    }
+    
+    public func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        onSelectValuePicker?(value: "\(pickerOptions![row])")
     }
     
     
