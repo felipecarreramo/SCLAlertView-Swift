@@ -11,7 +11,7 @@ import UIKit
 
 // Pop Up Styles
 public enum SCLAlertViewStyle {
-    case Success, Error, Notice, Warning, Info, Edit, Wait
+    case Success, Error, Notice, Warning, Info, Edit, Wait, Custom
 }
 
 // Action Types
@@ -65,7 +65,7 @@ public class SCLAlertViewResponder {
 let kCircleHeightBackground: CGFloat = 62.0
 
 // The Main Class
-public class SCLAlertView: UIViewController {
+public class SCLAlertView: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     let kDefaultShadowOpacity: CGFloat = 0.7
     let kCircleTopPosition: CGFloat = -12.0
     let kCircleBackgroundTopPosition: CGFloat = -15.0
@@ -76,6 +76,9 @@ public class SCLAlertView: UIViewController {
     let kWindowWidth: CGFloat = 240.0
     var kWindowHeight: CGFloat = 178.0
     var kTextHeight: CGFloat = 90.0
+    let kTextFieldHeight: CGFloat = 45.0
+    let kButtonHeight: CGFloat = 45.0
+    var kCustomViewHeight: CGFloat = 0.0
 
     // Font
     let kDefaultFont = "HelveticaNeue"
@@ -86,7 +89,7 @@ public class SCLAlertView: UIViewController {
     var pressBrightnessFactor = 0.85
     
     // UI Options
-    var showCloseButton = true
+    public var showCloseButton = true
 
     // Members declaration
     var baseView = UIView()
@@ -99,6 +102,14 @@ public class SCLAlertView: UIViewController {
     var durationTimer: NSTimer!
     private var inputs = [UITextField]()
     private var buttons = [SCLButton]()
+    private var selfReference: SCLAlertView?
+    
+    var customView: UIView?
+    var customCircleColor: UIColor?
+    var customImageIcon: UIImage?
+    var onSelectValuePicker: ((value: String) -> ())?
+    var pickerOptions: [AnyObject]?
+    var pickerView: UIPickerView?
     
     required public init?(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
@@ -169,28 +180,66 @@ public class SCLAlertView: UIViewController {
         }
         // Set background frame
         view.frame.size = sz
+        
+        // computing the right size to use for the textView
+        let maxHeight = sz.height - 100 // max overall height
+        var consumedHeight = CGFloat(0)
+        consumedHeight += kTitleTop + kTitleHeight
+        consumedHeight += 14
+        
+        
+        if let fCustomView = self.customView {
+            fCustomView.frame.origin.y = consumedHeight
+            fCustomView.frame.origin.x = (contentView.frame.size.width / 2) - (fCustomView.frame.size.width / 2)
+            consumedHeight += kCustomViewHeight
+        }
+        
+        consumedHeight += kButtonHeight * CGFloat(buttons.count)
+        consumedHeight += kTextFieldHeight * CGFloat(inputs.count)
+        
+        let maxViewTextHeight = maxHeight - consumedHeight
+        let viewTextWidth = kWindowWidth - 24
+        let suggestedViewTextSize = viewText.sizeThatFits(CGSizeMake(viewTextWidth, CGFloat.max))
+        let viewTextHeight = min(suggestedViewTextSize.height, maxViewTextHeight)
+        
+        
+        
+        // scroll management
+        if (suggestedViewTextSize.height > maxViewTextHeight) {
+            viewText.scrollEnabled = true
+        } else {
+            viewText.scrollEnabled = false
+        }
+        
+        let windowHeight = consumedHeight + viewTextHeight
         // Set frames
         var x = (sz.width - kWindowWidth) / 2
-        var y = (sz.height - kWindowHeight -  (kCircleHeight / 8)) / 2
-        contentView.frame = CGRect(x:x, y:y, width:kWindowWidth, height:kWindowHeight)
+        var y = (sz.height - windowHeight - (kCircleHeight / 8)) / 2
+        contentView.frame = CGRect(x:x, y:y, width:kWindowWidth, height:windowHeight)
         y -= kCircleHeightBackground * 0.6
         x = (sz.width - kCircleHeightBackground) / 2
         circleBG.frame = CGRect(x:x, y:y+6, width:kCircleHeightBackground, height:kCircleHeightBackground)
         // Subtitle
         y = kTitleTop + kTitleHeight
         viewText.frame = CGRect(x:12, y:y, width: kWindowWidth - 24, height:kTextHeight)
+        viewText.frame = CGRect(x:12, y:y, width: viewTextWidth, height:viewTextHeight)
         // Text fields
-        y += kTextHeight + 14.0
+        y +=  viewTextHeight + 14.0
+        
+        
+        y += kCustomViewHeight
+        
+        
         for txt in inputs {
             txt.frame = CGRect(x:12, y:y, width:kWindowWidth - 24, height:30)
             txt.layer.cornerRadius = 3
-            y += 40
+            y += kTextFieldHeight
         }
         // Buttons
         for btn in buttons {
             btn.frame = CGRect(x:12, y:y, width:kWindowWidth - 24, height:35)
             btn.layer.cornerRadius = 3
-            y += 45.0
+            y += kButtonHeight
         }
     }
     
@@ -202,7 +251,7 @@ public class SCLAlertView: UIViewController {
 
     public func addTextField(title:String?=nil)->UITextField {
         // Update view height
-        kWindowHeight += 40.0
+        kWindowHeight += kTextFieldHeight
         // Add text field
         let txt = UITextField()
         txt.borderStyle = UITextBorderStyle.RoundedRect
@@ -217,6 +266,28 @@ public class SCLAlertView: UIViewController {
         contentView.addSubview(txt)
         inputs.append(txt)
         return txt
+    }
+    
+    
+    public func addCustomView(customView: UIView){
+        
+        kCustomViewHeight += customView.frame.height
+        self.customView = customView
+        if let fCustomView = self.customView {
+            contentView.addSubview(fCustomView)
+        }
+    }
+    
+    
+    public func addCustomIcon(image: UIImage?, color: UIColor? = nil) {
+        
+        if let customColor = color {
+             customCircleColor = customColor
+        }
+        if let imageToChange = image {
+            customImageIcon = imageToChange
+        }
+        
     }
 
     public func addButton(title:String, action:()->Void)->SCLButton {
@@ -242,7 +313,7 @@ public class SCLAlertView: UIViewController {
 
     private func addButton(title:String)->SCLButton {
         // Update view height
-        kWindowHeight += 45.0
+        kWindowHeight += kButtonHeight
         // Add button
         let btn = SCLButton()
         btn.layer.masksToBounds = true
@@ -284,6 +355,21 @@ public class SCLAlertView: UIViewController {
     //Dismiss keyboard when tapped outside textfield
     func dismissKeyboard(){
         self.view.endEditing(true)
+    }
+    
+    // showCustom(view, title, subTitle)
+    public func showCustom(title: String, subTitle: String, closeButtonTitle:String?=nil, duration:NSTimeInterval=0.0, colorStyle: UInt=0x22B573, colorTextButton: UInt=0xFFFFFF ) -> SCLAlertViewResponder {
+        return showTitle(title, subTitle: subTitle, duration: duration, completeText:closeButtonTitle, style: .Custom, colorStyle: colorStyle, colorTextButton: colorTextButton)
+    }
+    
+    // showCustom(view, title, subTitle)
+    public func showPicker(title: String, options: [AnyObject], closeButtonTitle:String?=nil, duration:NSTimeInterval=0.0, colorStyle: UInt=0x22B573, colorTextButton: UInt=0xFFFFFF, onSelectValue: (value: String) -> ()) -> SCLAlertViewResponder {
+        onSelectValuePicker = onSelectValue
+        pickerOptions = options
+        pickerView = UIPickerView(frame: CGRectMake(0,0, 100, 100))
+        pickerView?.delegate = self
+        addCustomView(pickerView!)
+        return showTitle(title, subTitle: "", duration: duration, completeText:closeButtonTitle, style: .Custom, colorStyle: colorStyle, colorTextButton: colorTextButton)
     }
 
     // showSuccess(view, title, subTitle)
@@ -327,6 +413,7 @@ public class SCLAlertView: UIViewController {
 
     // showTitle(view, title, subTitle, duration, style)
     public func showTitle(title: String, subTitle: String, duration: NSTimeInterval?, completeText: String?, style: SCLAlertViewStyle, colorStyle: UInt?, colorTextButton: UInt?) -> SCLAlertViewResponder {
+        selfReference = self
         view.alpha = 0
         let rv = UIApplication.sharedApplication().keyWindow! as UIWindow
         rv.addSubview(view)
@@ -365,6 +452,10 @@ public class SCLAlertView: UIViewController {
 
         case .Wait:
             viewColor = UIColorFromRGB(colorStyle!)
+            
+        case .Custom:
+            viewColor = customCircleColor != nil ? customCircleColor! : UIColor.whiteColor()
+            iconImage = customImageIcon != nil ? customImageIcon! : UIImage()
         }
 
         // Title
@@ -377,9 +468,9 @@ public class SCLAlertView: UIViewController {
             viewText.text = subTitle
             // Adjust text view size, if necessary
             let str = subTitle as NSString
-            let attr = [NSFontAttributeName:viewText.font] as [String: AnyObject!]
+            let attr = [NSFontAttributeName:viewText.font ?? UIFont()]
             let sz = CGSize(width: kWindowWidth - 24, height:90)
-            let r = str.boundingRectWithSize(sz, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attr, context: nil)
+            let r = str.boundingRectWithSize(sz, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes:attr, context:nil)
             let ht = ceil(r.size.height)
             if ht < kTextHeight {
                 kWindowHeight -= (kTextHeight - ht)
@@ -415,6 +506,11 @@ public class SCLAlertView: UIViewController {
             btn.backgroundColor = viewColor
             btn.setTitleColor(UIColorFromRGB(colorTextButton!), forState:UIControlState.Normal)
         }
+        
+        
+        if let fCustomView = self.customView {
+            fCustomView.backgroundColor = UIColor.clearColor()
+        }
 
         // Adding duration
         if duration > 0 {
@@ -442,6 +538,7 @@ public class SCLAlertView: UIViewController {
             self.view.alpha = 0
             }, completion: { finished in
                 self.view.removeFromSuperview()
+                self.selfReference = nil
         })
     }
 
@@ -454,6 +551,21 @@ public class SCLAlertView: UIViewController {
             alpha: CGFloat(1.0)
         )
     }
+    
+    
+    public func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    public func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerOptions == nil ? 0 : pickerOptions!.count
+    }
+    
+    public func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return "\(pickerOptions![row])"
+    }
+    
+    
 }
 
 // ------------------------------------

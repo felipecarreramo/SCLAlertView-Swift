@@ -243,6 +243,16 @@ public class SCLAlertView: UIViewController {
         inputs.append(txt)
         return txt
     }
+    
+    
+    public func addCustomView(customView: UIView){
+        // Update view height
+        kWindowHeight += customView.frame.height
+        var frameCustomView = customView.frame
+        frameCustomView.origin.y = contentView.frame.size.height
+        customView.frame = frameCustomView
+        contentView.addSubview(customView)
+    }
 
     public func addButton(title:String, action:()->Void)->SCLButton {
         let btn = addButton(title)

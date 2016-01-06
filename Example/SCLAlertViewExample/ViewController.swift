@@ -39,6 +39,23 @@ class ViewController: UIViewController {
         alert.showSuccess(kSuccessTitle, subTitle: kSubtitle)
     }
     
+    @IBAction func showPicker(sender: AnyObject) {
+        
+        let alert = SCLAlertView()
+        let view = UIView(frame: CGRectMake(0, 0, 100, 100) )
+        view.backgroundColor = UIColor.redColor()
+        alert.addCustomIcon(UIImage(named: "images"), color: UIColor.redColor())
+        let button = alert.addButton("Cancel", action: {
+            
+            alert.hideView()
+            
+        })
+        alert.showPicker("Please select year", options: [1991, 1992, 1993, 1994], closeButtonTitle: "Select", onSelectValue: { value in
+            
+        })
+        button.backgroundColor = UIColor.greenColor()
+        
+    }
     @IBAction func showError(sender: AnyObject) {
 		SCLAlertView().showError("Hold On...", subTitle:"You have not saved your Submission yet. Please save the Submission before accessing the Responses list. Blah de blah de blah, blah. Blah de blah de blah, blah.Blah de blah de blah, blah.Blah de blah de blah, blah.Blah de blah de blah, blah.Blah de blah de blah, blah.", closeButtonTitle:"OK")
 //        SCLAlertView().showError(self, title: kErrorTitle, subTitle: kSubtitle)
