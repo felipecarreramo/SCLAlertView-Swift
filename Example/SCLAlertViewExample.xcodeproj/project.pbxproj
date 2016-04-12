@@ -8,15 +8,43 @@
 
 /* Begin PBXBuildFile section */
 		253330571A428E0700E8CD8E /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 253330561A428E0700E8CD8E /* Launch Screen.xib */; };
-		3855FAED1B3006620011EDE8 /* SCLAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3855FAEC1B3006620011EDE8 /* SCLAlertView.swift */; };
+		34C14E081C8F3BA500F4BF18 /* SCLAlertView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34C14E031C8F3B6800F4BF18 /* SCLAlertView.framework */; };
+		34C14E091C8F3BA500F4BF18 /* SCLAlertView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 34C14E031C8F3B6800F4BF18 /* SCLAlertView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CEABB2471942AD9700FCB13C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEABB2461942AD9700FCB13C /* AppDelegate.swift */; };
 		CEABB2501942AD9700FCB13C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEABB24F1942AD9700FCB13C /* Images.xcassets */; };
-		CEABB25C1942AD9700FCB13C /* SCLAlertViewExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEABB25B1942AD9700FCB13C /* SCLAlertViewExampleTests.swift */; };
 		CEABB2671942AEA500FCB13C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEABB2661942AEA500FCB13C /* ViewController.swift */; };
 		CEB569971942AE47009959CC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB569961942AE47009959CC /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		34C14E021C8F3B6800F4BF18 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 34C14DFD1C8F3B6800F4BF18 /* SCLAlertView.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 70264EF71B0F588700B32B18;
+			remoteInfo = SCLAlertView;
+		};
+		34C14E041C8F3B6800F4BF18 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 34C14DFD1C8F3B6800F4BF18 /* SCLAlertView.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 70264F021B0F588800B32B18;
+			remoteInfo = SCLAlertViewTests;
+		};
+		34C14E061C8F3B8800F4BF18 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 34C14DFD1C8F3B6800F4BF18 /* SCLAlertView.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 70264EF61B0F588700B32B18;
+			remoteInfo = SCLAlertView;
+		};
+		34C14E0A1C8F3BA500F4BF18 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 34C14DFD1C8F3B6800F4BF18 /* SCLAlertView.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 70264EF61B0F588700B32B18;
+			remoteInfo = SCLAlertView;
+		};
 		CEABB2561942AD9700FCB13C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CEABB2391942AD9700FCB13C /* Project object */;
@@ -26,16 +54,29 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		34C14E0C1C8F3BA500F4BF18 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				34C14E091C8F3BA500F4BF18 /* SCLAlertView.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		253330561A428E0700E8CD8E /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
-		3855FAEC1B3006620011EDE8 /* SCLAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCLAlertView.swift; sourceTree = "<group>"; };
+		34C14DFD1C8F3B6800F4BF18 /* SCLAlertView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SCLAlertView.xcodeproj; path = ../SCLAlertView.xcodeproj; sourceTree = "<group>"; };
 		CEABB2411942AD9700FCB13C /* SCLAlertViewExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SCLAlertViewExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEABB2451942AD9700FCB13C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEABB2461942AD9700FCB13C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEABB24F1942AD9700FCB13C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CEABB2551942AD9700FCB13C /* SCLAlertViewExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SCLAlertViewExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEABB25A1942AD9700FCB13C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CEABB25B1942AD9700FCB13C /* SCLAlertViewExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCLAlertViewExampleTests.swift; sourceTree = "<group>"; };
 		CEABB2661942AEA500FCB13C /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CEB569961942AE47009959CC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -45,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34C14E081C8F3BA500F4BF18 /* SCLAlertView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,9 +100,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		34C14DFE1C8F3B6800F4BF18 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				34C14E031C8F3B6800F4BF18 /* SCLAlertView.framework */,
+				34C14E051C8F3B6800F4BF18 /* SCLAlertViewTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		CEABB2381942AD9700FCB13C = {
 			isa = PBXGroup;
 			children = (
+				34C14DFD1C8F3B6800F4BF18 /* SCLAlertView.xcodeproj */,
 				CEABB2431942AD9700FCB13C /* SCLAlertViewExample */,
 				CEABB2581942AD9700FCB13C /* SCLAlertViewExampleTests */,
 				CEABB2421942AD9700FCB13C /* Products */,
@@ -79,7 +131,6 @@
 		CEABB2431942AD9700FCB13C /* SCLAlertViewExample */ = {
 			isa = PBXGroup;
 			children = (
-				CEABB2651942ADCD00FCB13C /* SCLAlertView */,
 				CEABB2441942AD9700FCB13C /* Supporting Files */,
 				CEABB24F1942AD9700FCB13C /* Images.xcassets */,
 				CEB569961942AE47009959CC /* Main.storyboard */,
@@ -101,7 +152,6 @@
 		CEABB2581942AD9700FCB13C /* SCLAlertViewExampleTests */ = {
 			isa = PBXGroup;
 			children = (
-				CEABB25B1942AD9700FCB13C /* SCLAlertViewExampleTests.swift */,
 				CEABB2591942AD9700FCB13C /* Supporting Files */,
 			);
 			path = SCLAlertViewExampleTests;
@@ -115,14 +165,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		CEABB2651942ADCD00FCB13C /* SCLAlertView */ = {
-			isa = PBXGroup;
-			children = (
-				3855FAEC1B3006620011EDE8 /* SCLAlertView.swift */,
-			);
-			name = SCLAlertView;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -133,10 +175,13 @@
 				CEABB23D1942AD9700FCB13C /* Sources */,
 				CEABB23E1942AD9700FCB13C /* Frameworks */,
 				CEABB23F1942AD9700FCB13C /* Resources */,
+				34C14E0C1C8F3BA500F4BF18 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				34C14E071C8F3B8800F4BF18 /* PBXTargetDependency */,
+				34C14E0B1C8F3BA500F4BF18 /* PBXTargetDependency */,
 			);
 			name = SCLAlertViewExample;
 			productName = SCLAlertViewExample;
@@ -192,6 +237,12 @@
 			mainGroup = CEABB2381942AD9700FCB13C;
 			productRefGroup = CEABB2421942AD9700FCB13C /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 34C14DFE1C8F3B6800F4BF18 /* Products */;
+					ProjectRef = 34C14DFD1C8F3B6800F4BF18 /* SCLAlertView.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				CEABB2401942AD9700FCB13C /* SCLAlertViewExample */,
@@ -199,6 +250,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		34C14E031C8F3B6800F4BF18 /* SCLAlertView.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SCLAlertView.framework;
+			remoteRef = 34C14E021C8F3B6800F4BF18 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		34C14E051C8F3B6800F4BF18 /* SCLAlertViewTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SCLAlertViewTests.xctest;
+			remoteRef = 34C14E041C8F3B6800F4BF18 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		CEABB23F1942AD9700FCB13C /* Resources */ = {
@@ -226,7 +294,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEABB2671942AEA500FCB13C /* ViewController.swift in Sources */,
-				3855FAED1B3006620011EDE8 /* SCLAlertView.swift in Sources */,
 				CEABB2471942AD9700FCB13C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -235,13 +302,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEABB25C1942AD9700FCB13C /* SCLAlertViewExampleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		34C14E071C8F3B8800F4BF18 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SCLAlertView;
+			targetProxy = 34C14E061C8F3B8800F4BF18 /* PBXContainerItemProxy */;
+		};
+		34C14E0B1C8F3BA500F4BF18 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SCLAlertView;
+			targetProxy = 34C14E0A1C8F3BA500F4BF18 /* PBXContainerItemProxy */;
+		};
 		CEABB2571942AD9700FCB13C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CEABB2401942AD9700FCB13C /* SCLAlertViewExample */;
@@ -333,6 +409,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = SCLAlertViewExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "SIX-DAYS-LLC.${PRODUCT_NAME:rfc1034identifier}";
@@ -346,6 +423,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = SCLAlertViewExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "SIX-DAYS-LLC.${PRODUCT_NAME:rfc1034identifier}";

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SCLAlertView
+
 
 let kSuccessTitle = "Congratulations"
 let kErrorTitle = "Connection error"
