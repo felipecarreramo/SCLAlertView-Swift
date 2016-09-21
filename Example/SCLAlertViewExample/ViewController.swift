@@ -32,21 +32,21 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func showSuccess(sender: AnyObject) {
+    @IBAction func showSuccess(_ sender: AnyObject) {
 		let alert = SCLAlertView()
-		alert.addButton("First Button", target:self, selector:Selector("firstButton"))
+		alert.addButton("First Button", target:self, selector:#selector(firstButton))
 		alert.addButton("Second Button") {
 			print("Second button tapped")
 		}
-        alert.showSuccess(kSuccessTitle, subTitle: kSubtitle)
+        _ = alert.showSuccess(kSuccessTitle, subTitle: kSubtitle)
     }
     
-    @IBAction func showPicker(sender: AnyObject) {
+    @IBAction func showPicker(_ sender: AnyObject) {
         
         let alert = SCLAlertView()
-        let view = UIView(frame: CGRectMake(0, 0, 100, 100) )
-        view.backgroundColor = UIColor.redColor()
-        alert.addCustomIcon(UIImage(named: "images"), color: UIColor.redColor())
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100) )
+        view.backgroundColor = UIColor.red
+        alert.addCustomIcon(UIImage(named: "images"), color: UIColor.red)
         let button = alert.addButton("Cancel", action: {
             
             alert.hideView()
@@ -55,27 +55,27 @@ class ViewController: UIViewController {
         alert.showPicker("Please select year", options: [1991, 1992, 1993, 1994], closeButtonTitle: "Select", onSelectValue: { value in
             print(value)
         })
-        button.backgroundColor = UIColor.greenColor()
+        button.backgroundColor = UIColor.green
         
     }
-    @IBAction func showError(sender: AnyObject) {
+    @IBAction func showError(_ sender: AnyObject) {
 		SCLAlertView().showError("Hold On...", subTitle:"You have not saved your Submission yet. Please save the Submission before accessing the Responses list. Blah de blah de blah, blah. Blah de blah de blah, blah.Blah de blah de blah, blah.Blah de blah de blah, blah.Blah de blah de blah, blah.Blah de blah de blah, blah.", closeButtonTitle:"OK")
 //        SCLAlertView().showError(self, title: kErrorTitle, subTitle: kSubtitle)
     }
     
-    @IBAction func showNotice(sender: AnyObject) {
+    @IBAction func showNotice(_ sender: AnyObject) {
         SCLAlertView().showNotice(kNoticeTitle, subTitle: kSubtitle)
     }
     
-    @IBAction func showWarning(sender: AnyObject) {
+    @IBAction func showWarning(_ sender: AnyObject) {
         SCLAlertView().showWarning(kWarningTitle, subTitle: kSubtitle)
     }
     
-    @IBAction func showInfo(sender: AnyObject) {
+    @IBAction func showInfo(_ sender: AnyObject) {
         SCLAlertView().showInfo(kInfoTitle, subTitle: kSubtitle)
     }
 
-	@IBAction func showEdit(sender: AnyObject) {
+	@IBAction func showEdit(_ sender: AnyObject) {
 		let alert = SCLAlertView()
 		let txt = alert.addTextField("Enter your name")
         alert.hideWhenBackgroundViewIsTapped = true
